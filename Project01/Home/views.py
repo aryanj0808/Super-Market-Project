@@ -1,6 +1,7 @@
 from django.shortcuts import render, HttpResponse
 from datetime import datetime
 from Home.models import Contact
+from Home.models import Product
 from django.contrib import messages
 # Create your views here.
 def index(request):
@@ -19,4 +20,8 @@ def contact(request):
         messages.success(request, 'Your message has been sent')
     return render(request, 'contact.html')
 def services(request):
-    return render(request, 'services.html')
+    products=Product.objects.all()
+    data={
+        'products':products
+    }
+    return render(request, 'services.html', data)
